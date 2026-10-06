@@ -24,4 +24,8 @@ teaching scenario.
 
 ## Working context
 
-_You'll fill this in during Module 1._
+- Release 4.2 shipped 12 Aug 2026: ping wait cut from 90 to 60 seconds, proximity weighted more than recent acceptance history when ranking who gets pinged, console filters persist, three defect fixes (wiki Releases database, "4.2" page and its comments).
+- Two symptoms since 4.2: callouts vanish before the responder can answer (15 tickets, 11 handlers) and some responders go quiet (30 open tickets from 4 handlers: Okafor, Pruitt, Fischer, Demir). That is about 2 to 1, which matches the support lead's read. Likely caused by the ping wait and the proximity change, but unconfirmed.
+- Sources used: wiki Customer interviews (4 handlers, 2 to 5 Sep), rook-database support_tickets (147 tickets, 29 Jun to 7 Sep), wiki Glossary. All feedback comes from handlers, never responders directly, and the data stops 7 Sep.
+- Mostly noise for this problem: Supply and gear (26 tickets), account and admin, saved filters, dark mode, text size, alert sounds.
+- Still open: the engineering manager's 14 Aug question (should the proximity change apply to responders who turn jobs down?) was never answered; the "August seasonal dip" was never tested; Priya, who owned both 4.2 items, left 21 Aug; no ping or routing data checked yet.
