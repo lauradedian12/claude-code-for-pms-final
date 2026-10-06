@@ -24,6 +24,20 @@ prompt library built from your own questions.
 
 ### 1.
 
+What's contradictory or missing, not just in the company documents, but across everything in 00-rook?
+
 ### 2.
 
+Where are the interview notes stored and can you provide a summary of the findings?
+
 ### 3.
+
+We need to establish metric data to understand how things are trending. Is there data available to look at weekly acceptance numbers and callout fill rates?
+
+### 4.
+
+Have you looked at the support tickets yet?
+
+### 5.
+
+Is there anything missing that could be important context to consider?
