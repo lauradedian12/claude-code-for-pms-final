@@ -14,7 +14,31 @@ prompt library built from your own questions.
 ---
 
 ### 1.
+/review-checklist 05-super-speed/brief.md
 
 ### 2.
+yes, apply fixes 1 to 5
 
 ### 3.
+run the checklist again on the brief
+
+### 4.
+apply nits 2 to 4 and say the rate covers all responders
+
+### 5.
+merge into main
+
+### 6.
+give me the link to my brief
+
+### 7.
+run the review skill of this: https://github.com/kristensaidmayer/claude-code-for-pms-final/blob/main/briefs/dispatch-quiet-responder-brief.md
+
+### 8.
+yes, draft the note to Kristen
+
+### 9.
+Schedule review-checklist to run every Monday morning, and let me know what it finds. Nothing needs to be ready for it to fire today. I'm setting the habit, not waiting on the result.
+
+### 10.
+disable this schedule
