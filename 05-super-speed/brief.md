@@ -1,6 +1,6 @@
 # Quiet responders: give them a way back
 
-For Helen · Draft
+For Helen · Owner: Dispatch PM · Draft
 
 **The problem.** Since 4.2, four responders (Farlight, The Undertow, Meteor Mite, Vesper) dropped from about 49 pings a week combined to 3. They weren't turning jobs down: before 4.2 they said yes 69–82% of the time. Today a missed ping costs the same as a no, scores never fade, and nothing gives a low-ranked responder a way back.
 
@@ -29,17 +29,26 @@ Wen is unavailable, so items 2 and 3 rest on assumptions for her to confirm.
 
 ## How we'd know it worked
 
-Proposed aims, to agree with Marcus. We'd start with a four-week pilot on Farlight, Meteor Mite and The Gale.
+Proposed aims, to agree with Marcus. We'd start with a four-week pilot on all four quiet responders (Farlight, The Undertow, Meteor Mite, Vesper). The Gale is not in the pilot: it shares Eastgate with Meteor Mite and is our load comparison.
 
-- **Pings to the four:** from 3 a week combined to about 8 each (they used to get about 12).
-- **Missed-ping rate:** from 12.7% to under 5%.
-- **Guardrails:** fill rate stays at 94% or above, and The Gale's load moves back toward 13 pings a week from 21.
-- **Handler tickets** on "starved of pings" and "gone before he could answer": new ones near zero.
+Baselines are from the ping data, which stops 6 Sep, and the tickets as of 7 Sep.
+
+- **Pings to the four:** from 3 a week combined (week of 31 Aug) to about 32 combined, about 8 each. Before 4.2 they got about 49 combined, about 12 each.
+- **Missed-ping rate (all responders):** from 12.7% (by 31 Aug) to under 5%.
+- **Guardrails:** fill rate stays at 94% or above, and The Gale's load moves back toward 13 pings a week from 21 (by 31 Aug).
+- **Handler tickets** (this also tests item 1, handler can see it): from 30 open "starved of pings" and 15 "gone before he could answer" tickets, none closed, to new ones under 3 a week (proposed, to agree with Marcus).
 
 ## Still unknown
 
-- Whether the shorter wait or the heavier proximity weighting did more damage. The 60 s wait stays until we have response times.
-- Our ping data stops on 6 Sep. A refresh from Ravi is requested.
+Owners are suggestions to confirm. Each answer is needed before the pilot starts; exact dates to be set once owners agree.
+
+- Whether the shorter wait or the heavier proximity weighting did more damage. The 60 s wait stays until we have response times. Owner: Marcus (response times), Wen (scores).
+- Our ping data stops on 6 Sep. A refresh from Ravi is requested. Owner: Ravi.
+- Do callouts have an urgency field? Needed for the catch-up ping (3b). Owner: Wen.
+- Did missed pings actually reach the phone? Needs push delivery logs. Owner: Marcus.
+- Can the system honour a late tap after the ping has moved on (item 4)? Owner: Marcus.
+- Can scores be saved so the console can show them (item 1)? Owner: Marcus.
+- What counts as "quiet", and the exact wording handlers see (item 1)? Owner: Dispatch PM with Wen for the definition, Sofia for the wording.
 
 **Watch-out:** Supply schedules servicing into low-callout windows, and giving pings back to these four changes their load.
 
