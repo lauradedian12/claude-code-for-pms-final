@@ -1,6 +1,6 @@
 # Quiet responders: give them a way back
 
-For Helen · Owner: Dispatch PM · Draft
+For Helen · Owner: Laura, PM, Rook Dispatch · Draft
 
 **The problem.** Since 4.2, four responders (Farlight, The Undertow, Meteor Mite, Vesper) dropped from about 49 pings a week combined to 3. They weren't turning jobs down: before 4.2 they said yes 69–82% of the time. Today a missed ping costs the same as a no, scores never fade, and nothing gives a low-ranked responder a way back.
 
@@ -8,12 +8,14 @@ For Helen · Owner: Dispatch PM · Draft
 
 ## What we'd build instead of changing a number
 
-1. **The handler can see it.** The console flags "No pings in 6 days" with the plain reason: "Ranked low after missed pings. Availability and skills are fine." Kip stops guessing.
+1. **The handler can see it.** The console flags "No pings in 6 days" with the plain reason: "Ranked low after missed pings. Availability and skills are fine." Kip, the handler for Meteor Mite and The Gale, stops guessing.
 2. **A missed ping isn't a "no".** Someone who didn't answer in time isn't treated as someone who turned the job down.
 3. **A way back.** After a quiet spell, the responder gets a catch-up ping with the full wait, and their standing drifts back toward neutral over time. This is Wen's 2019 question, answered.
 4. **A late tap still counts.** If the ping has moved on but nobody has taken the callout, a late tap takes it. This is aimed at the 15 "gone before he could answer" tickets.
 
 **What a quiet responder would notice:** a ping arrives again, and the app tells them it's theirs if they want it.
+
+**Why not just revert the 60 s wait, or lower what a miss costs?** Either may be the small fix engineering has in mind, and either may be worth doing first. But on their own, neither gives a low-ranked responder a way back or tells the handler why the phone went quiet. This is my reasoning, not tested. To check with Marcus.
 
 ## Where each piece stands
 
@@ -30,6 +32,8 @@ Wen is unavailable, so items 2 and 3 rest on assumptions for her to confirm.
 ## How we'd know it worked
 
 Proposed aims, to agree with Marcus. We'd start with a four-week pilot on all four quiet responders (Farlight, The Undertow, Meteor Mite, Vesper). The Gale is not in the pilot: it shares Eastgate with Meteor Mite and is our load comparison.
+
+Why these targets (proposed): about 8 pings each is two-thirds of the roughly 12 each they got before 4.2, a realistic first month rather than full recovery. Under 5% missed sits near the 2–5% before 4.2.
 
 Baselines are from the ping data, which stops 6 Sep, and the tickets as of 7 Sep.
 
@@ -49,6 +53,8 @@ Owners are suggestions to confirm. Each answer is needed before the pilot starts
 - Can the system honour a late tap after the ping has moved on (item 4)? Owner: Marcus.
 - Can scores be saved so the console can show them (item 1)? Owner: Marcus.
 - What counts as "quiet", and the exact wording handlers see (item 1)? Owner: Dispatch PM with Wen for the definition, Sofia for the wording.
+
+**If we do nothing:** the four stay at about 3 pings a week combined, and the 45 open tickets stay unanswered. Unanswered callouts have recovered to 5.5%, which hides the problem. The cost of unfilled callouts is unknown (no revenue figure).
 
 **Watch-out:** Supply schedules servicing into low-callout windows, and giving pings back to these four changes their load.
 
