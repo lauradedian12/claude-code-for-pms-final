@@ -34,8 +34,8 @@ Wen is unavailable, so items 2 and 3 rest on assumptions for her to confirm. Own
 A four-week pilot on all four quiet responders. The Gale is not in it: it shares Eastgate with Meteor Mite and is our load comparison. Aims are proposed, to agree with Marcus. Baselines are from the ping data (to 6 Sep) and tickets (as of 7 Sep).
 
 - **Pings to the four:** from 3 a week combined (week of 31 Aug) to about 32 combined, about 8 each. Before 4.2 they got about 49 combined, about 12 each, so this is two-thirds of that: a realistic first month.
-- **Missed-ping rate (all responders):** from 12.7% (by 31 Aug) to under 5%. Before 4.2 it was 2.3% (1,085 pings, 29 Jun to 11 Aug; 1.2–3.4% in any week), so 5% leaves some room.
-- **Guardrails:** fill rate stays at 94% or above (proposed stop line: pause the pilot if it drops below 94%, to agree with Marcus), and The Gale's load moves back toward 13 pings a week from 21 (by 31 Aug).
+- **Missed-ping rate (all responders):** from 12.7% (week of 31 Aug) to under 5%. Before 4.2 it was 2.3% (1,085 pings, 29 Jun to 11 Aug; 1.2–3.4% in any week), so 5% leaves some room.
+- **Guardrails:** fill rate stays at 94% or above (proposed stop line: pause the pilot if it drops below 94%, to agree with Marcus), and The Gale's load moves back toward 13 pings a week from 21 (week of 31 Aug).
 - **Handler tickets** (also tests item 1): from 30 open "starved of pings" and 15 "gone before he could answer", none closed, to new ones under 3 a week (proposed, to agree with Marcus).
 
 **If we do nothing:** the four stay at about 3 pings a week combined, and the 45 open tickets stay unanswered. Unanswered callouts have recovered to 5.5%, which hides the problem. The cost of unfilled callouts is unknown (no revenue figure).
