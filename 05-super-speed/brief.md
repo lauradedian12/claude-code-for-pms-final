@@ -2,7 +2,7 @@
 
 For Helen · Owner: Laura, PM, Rook Dispatch · Draft
 
-**The problem.** Since 4.2, four responders (Farlight, The Undertow, Meteor Mite, Vesper) dropped from about 49 pings a week combined to 3. They weren't turning jobs down: before 4.2 they said yes 69–82% of the time. Today a missed ping costs the same as a no, scores never fade, and nothing gives a low-ranked responder a way back. Handlers feel it: "I would rather know than guess" (ticket 3089). One responder, via their handler: "starting to wonder if im still even in the system" (tickets 3120 and 3121).
+**The problem.** Since 4.2, four responders (Farlight, The Undertow, Meteor Mite, Vesper) dropped from about 49 pings a week combined to 3. They weren't turning jobs down: before 4.2 they said yes 69–81% of the time. Today a missed ping costs the same as a no, scores never fade, and nothing gives a low-ranked responder a way back. Handlers feel it: "I would rather know than guess" (ticket 3089). One responder, via their handler: "starting to wonder if im still even in the system" (tickets 3120 and 3121).
 
 ## What we'd build instead of changing a number
 
