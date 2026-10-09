@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rook Dispatch: quiet responder prototype</title>
+<style>
+:root{--bg:#fff3c4;--dot:#f5d56a;--card:#ffffff;--ink:#14213d;--mute:#4b5878;--line:#14213d;--red:#e63946;--blue:#1d4ed8;--yellow:#ffd60a;--amber-bg:#fff0b3;--amber-ink:#5c3a00;--green-bg:#c9f2d2;--green-ink:#0d4a1f;--bar:#1d4ed8;--bar-low:#e63946;--panel:#fffbe8;--head:Impact,"Arial Black","Haettenschweiler",sans-serif}
+:root[data-theme=dark]{--bg:#0b1020;--dot:#18213f;--card:#151b33;--ink:#f1f5ff;--mute:#aab6d6;--line:#f1f5ff;--red:#ff5a67;--blue:#6d9bff;--yellow:#ffd60a;--amber-bg:#3a2f08;--amber-ink:#ffe27a;--green-bg:#12351f;--green-ink:#9ff0b3;--bar:#6d9bff;--bar-low:#ff5a67;--panel:#1b2342}
+*{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:15px/1.5 "Trebuchet MS","Segoe UI",Roboto,sans-serif;background-color:var(--bg);background-image:radial-gradient(var(--dot) 1.5px,transparent 1.6px);background-size:14px 14px}
+header{display:flex;align-items:center;gap:14px;padding:12px 24px;background:var(--blue);color:#fff;border-bottom:4px solid var(--ink);flex-wrap:wrap}
+.shield{width:38px;height:44px;background:var(--yellow);clip-path:polygon(50% 0,100% 12%,100% 55%,50% 100%,0 55%,0 12%);display:grid;place-items:center;color:var(--red);font:22px var(--head)}
+header b{font:26px var(--head);letter-spacing:.06em;text-transform:uppercase;text-shadow:2px 2px 0 var(--ink)}
+header .who{font-size:13px;opacity:.95}
+header .sp{flex:1}
+button{font:inherit;cursor:pointer}
+.ghost{background:var(--yellow);border:3px solid var(--ink);color:#14213d;border-radius:8px;padding:5px 12px;font-weight:700;box-shadow:3px 3px 0 var(--ink)}
+.ghost:hover{transform:translate(1px,1px);box-shadow:2px 2px 0 var(--ink)}
+.banner{margin:16px 24px 0;padding:10px 14px;border:3px solid var(--ink);background:var(--card);border-radius:4px;font-size:13px;box-shadow:4px 4px 0 var(--ink);max-width:1132px}
+main{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;padding:20px 24px 40px;max-width:1180px;margin:0 auto}
+@media(max-width:900px){main{grid-template-columns:1fr}}
+h2{font:22px var(--head);letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px;color:var(--ink);text-shadow:2px 2px 0 var(--yellow)}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:620px){.cards{grid-template-columns:1fr}}
+.card{background:var(--card);border:4px solid var(--ink);border-radius:6px;padding:16px;box-shadow:6px 6px 0 var(--ink);position:relative}
+.card h3{margin:0;font:26px var(--head);letter-spacing:.05em;text-transform:uppercase}
+.sub{color:var(--mute);font-size:13px;display:flex;gap:8px;align-items:center;margin-top:2px}
+.dot{width:10px;height:10px;border-radius:50%;background:#16a34a;border:2px solid var(--ink);display:inline-block}
+.flag{display:inline-flex;align-items:center;gap:8px;margin:12px 0 4px;padding:8px 14px;border-radius:4px;background:var(--red);color:#fff;border:3px solid var(--ink);font:18px var(--head);letter-spacing:.05em;text-transform:uppercase;box-shadow:3px 3px 0 var(--ink);transform:rotate(-1.5deg)}
+.flag:hover{transform:rotate(-1.5deg) translate(1px,1px);box-shadow:2px 2px 0 var(--ink)}
+.flag.ok{background:#16a34a}
+.flag .chev{font-size:12px}
+.flagwrap{min-height:56px}
+.plain{height:42px}
+.stat{display:flex;justify-content:space-between;font-size:14px;margin:6px 0;border-bottom:2px dotted var(--mute)}
+.stat span:first-child{color:var(--mute)}
+.bars{display:flex;align-items:flex-end;gap:5px;height:76px;margin-top:12px;border-bottom:4px solid var(--ink)}
+.bars div{flex:1;background:var(--bar);border:2px solid var(--ink);border-bottom:0;position:relative;min-height:2px}
+.bars div.low{background:var(--bar-low)}
+.bars div.new{background:var(--yellow)}
+.axis{display:flex;justify-content:space-between;color:var(--mute);font-size:11px;margin-top:4px}
+.drawer{margin-top:20px;background:var(--panel);border:4px solid var(--ink);border-radius:6px;padding:18px 20px;box-shadow:6px 6px 0 var(--red)}
+.drawer[hidden]{display:none}
+.drawer h3{margin:0 0 4px;font:24px var(--head);letter-spacing:.05em;text-transform:uppercase}
+.drawer p{margin:6px 0}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+@media(max-width:620px){.facts{grid-template-columns:1fr}}
+.fact{background:var(--card);border:3px solid var(--ink);padding:10px 12px;box-shadow:3px 3px 0 var(--ink)}
+.fact b{display:block;font:26px var(--head);color:var(--red);letter-spacing:.03em}
+.fact small{color:var(--mute)}
+.primary{background:var(--red);color:#fff;border:3px solid var(--ink);border-radius:6px;padding:10px 18px;font:20px var(--head);letter-spacing:.06em;text-transform:uppercase;box-shadow:4px 4px 0 var(--ink)}
+.primary:hover{transform:translate(1px,1px);box-shadow:3px 3px 0 var(--ink)}
+.primary[disabled]{opacity:.5;cursor:default;transform:none}
+.note{color:var(--mute);font-size:13px}
+.phonecol{position:sticky;top:12px;align-self:start}
+.phone{background:#0b1020;border:4px solid var(--ink);border-radius:34px;padding:12px;width:100%;max-width:300px;margin:0 auto;box-shadow:6px 6px 0 var(--ink)}
+.screen{background:var(--card);border-radius:22px;min-height:440px;padding:20px 16px;display:flex;flex-direction:column;gap:12px;color:var(--ink)}
+.screen .top{display:flex;justify-content:space-between;color:var(--mute);font-size:12px;font-weight:700;text-transform:uppercase}
+.pingcard{border:3px solid var(--ink);border-radius:6px;padding:14px;background:var(--amber-bg);position:relative;box-shadow:4px 4px 0 var(--red)}
+.pingcard .where{font:15px var(--head);letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+.pingcard p{margin:6px 0}
+.count{font:46px var(--head);text-align:center;margin:4px 0;color:var(--red);letter-spacing:.04em}
+.timebar{height:12px;border:2px solid var(--ink);background:var(--card);overflow:hidden}
+.timebar i{display:block;height:100%;background:var(--red);width:100%;transition:width 1s linear}
+.row{display:flex;gap:8px}
+.row button{flex:1;padding:10px;border-radius:6px;border:3px solid var(--ink);background:var(--card);color:var(--ink);font:18px var(--head);letter-spacing:.05em;text-transform:uppercase;box-shadow:3px 3px 0 var(--ink)}
+.row .yes{background:var(--blue);color:#fff}
+.center{text-align:center;color:var(--mute);margin:auto 0}
+.msg{border:3px solid var(--ink);padding:14px;font-size:14px;box-shadow:4px 4px 0 var(--ink)}
+.msg b{font:22px var(--head);letter-spacing:.05em;text-transform:uppercase}
+.msg.good{background:var(--green-bg);color:var(--green-ink)}
+.msg.warn{background:var(--amber-bg);color:var(--amber-ink)}
+.ctl{margin-top:14px;text-align:center}
+.ctl button{font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <div class="shield" aria-hidden="true">R</div>
+  <b>Rook Dispatch</b>
+  <span class="who">Handler console · Kip · 2 heroes on your roster</span>
+  <span class="sp"></span>
+  <button class="ghost" id="theme" type="button">Night patrol</button>
+  <button class="ghost" id="reset" type="button">Reset demo</button>
+</header>
+<div class="banner">Prototype with mock data from the ping log through 6 Sep. Click the red flag on Meteor Mite to see what a handler would see.</div>
+
+<main>
+  <section>
+    <h2>Your heroes</h2>
+    <div class="cards">
+      <article class="card" id="miteCard">
+        <h3>Meteor Mite</h3>
+        <div class="sub"><span class="dot"></span> Available · Eastgate</div>
+        <div class="flagwrap"><button class="flag" id="flag" type="button" aria-expanded="false" aria-controls="drawer"><span id="flagText">No pings in 6 days</span><span class="chev" id="chev">▸</span></button></div>
+        <div class="stat"><span>Pings this week</span><b id="miteWeek">1</b></div>
+        <div class="stat"><span>Usual per week</span><b>about 11</b></div>
+        <div class="bars" id="miteBars" aria-label="Pings per week for Meteor Mite"></div>
+        <div class="axis"><span>29 Jun</span><span>4.2 ships 12 Aug</span><span>31 Aug</span></div>
+      </article>
+      <article class="card">
+        <h3>The Gale</h3>
+        <div class="sub"><span class="dot"></span> Available · Eastgate</div>
+        <div class="flagwrap plain"></div>
+        <div class="stat"><span>Pings this week</span><b>21</b></div>
+        <div class="stat"><span>Usual per week</span><b>about 13</b></div>
+        <div class="bars" id="galeBars" aria-label="Pings per week for The Gale"></div>
+        <div class="axis"><span>29 Jun</span><span>4.2 ships 12 Aug</span><span>31 Aug</span></div>
+      </article>
+    </div>
+
+    <div class="drawer" id="drawer" hidden>
+      <h3>Why Meteor Mite is quiet</h3>
+      <p><b>Ranked low after missed pings.</b> Availability and skills are fine.</p>
+      <div class="facts">
+        <div class="fact"><b>69% → 29%</b><small>said yes, before 4.2 vs since</small></div>
+        <div class="fact"><b>11 → 1</b><small>pings a week, before vs this week</small></div>
+        <div class="fact"><b>21 vs 1</b><small>pings this week, The Gale vs Meteor Mite</small></div>
+      </div>
+      <p>Today a missed ping counts the same as turning a job down, and a low ranking never fades. So Meteor Mite rarely gets the chance to earn it back.</p>
+      <p class="note">What this prototype shows: a catch-up ping after 7 quiet days, second in line in their usual area, with the full 90 seconds. A miss would count half as much as a decline. These are assumptions for Wen to confirm.</p>
+      <p><button class="primary" id="offer" type="button">Send the signal</button> <span class="note" id="offerNote"></span></p>
+    </div>
+  </section>
+
+  <aside class="phonecol">
+    <h2>Hero-phone</h2>
+    <div class="phone"><div class="screen" id="screen"></div></div>
+    <div class="ctl"><button class="ghost" id="ff" type="button" hidden>Skip ahead: let the 90 seconds run out</button></div>
+  </aside>
+</main>
+
+<script>
+var miteData=[11,12,10,11,12,11,10,4,2,1];
+var galeData=[13,12,13,14,13,13,15,17,20,21];
+var state='quiet', left=90, timer=null, drawerOpen=false;
+var $=function(id){return document.getElementById(id)};
+
+function bars(el,data,lowFrom,highlightLast){
+  el.innerHTML='';
+  data.forEach(function(v,i){
+    var d=document.createElement('div');
+    d.style.height=Math.max(2,Math.round(v/21*72))+'px';
+    d.title=v+' pings';
+    if(i>=lowFrom&&el.id==='miteBars')d.className='low';
+    if(highlightLast&&i===data.length-1)d.className='new';
+    el.appendChild(d);
+  });
+}
+
+function phone(){
+  var s=$('screen'), h='<div class="top"><span>Rook</span><span>Meteor Mite</span></div>';
+  if(state==='quiet'){
+    h+='<div class="center">All quiet on the signal.<br><span class="note">Last ping: 6 days ago</span></div>';
+  }else if(state==='offered'){
+    h+='<div class="pingcard"><div class="where">Eastgate · catch-up ping</div>'+
+       '<p><b>A clown has flooded the underpass.</b></p>'+
+       '<p>This one is yours if you want it.</p>'+
+       '<div class="count" id="count">'+left+' s</div>'+
+       '<div class="timebar"><i id="tb" style="width:'+(left/90*100)+'%"></i></div></div>'+
+       '<div class="row"><button class="yes" id="take" type="button">Take it</button><button id="no" type="button">Not now</button></div>';
+  }else if(state==='taken'){
+    h+='<div class="msg good"><b>You took it!</b><br>Welcome back. Your ranking starts moving up again.</div>';
+  }else if(state==='missed'){
+    h+='<div class="msg warn"><b>Time ran out</b><br>This counts as a missed ping, not a turn-down. Nothing else changes for you today.</div>';
+  }else if(state==='declined'){
+    h+='<div class="msg warn"><b>Noted</b><br>This counts as a turn-down.</div>';
+  }
+  s.innerHTML=h;
+  var t=$('take'),n=$('no');
+  if(t)t.onclick=function(){finish('taken')};
+  if(n)n.onclick=function(){finish('declined')};
+}
+
+function render(){
+  var f=$('flag');
+  f.className='flag'+(state==='taken'?' ok':'');
+  $('flagText').textContent=state==='taken'?'Back in rotation':(state==='offered'?'Signal sent':'No pings in 6 days');
+  $('chev').textContent=drawerOpen?'▾':'▸';
+  f.setAttribute('aria-expanded',drawerOpen);
+  $('drawer').hidden=!drawerOpen;
+  var data=miteData.slice();
+  if(state==='taken'||state==='missed'||state==='declined')data[9]=2;
+  $('miteWeek').textContent=data[9];
+  bars($('miteBars'),data,7,state!=='quiet'&&state!=='offered');
+  bars($('galeBars'),galeData,99,false);
+  var o=$('offer');
+  o.disabled=(state!=='quiet');
+  $('offerNote').textContent=state==='quiet'?'':(state==='offered'?'Sent. Watch the hero-phone on the right.':(state==='taken'?'Taken. Meteor Mite is back in the rotation.':'Sent and not taken. Try again with Reset demo.'));
+  $('ff').hidden=(state!=='offered');
+  phone();
+}
+
+function tick(){
+  left--;
+  if(left<=0){finish('missed');return}
+  var c=$('count'),tb=$('tb');
+  if(c)c.textContent=left+' s';
+  if(tb)tb.style.width=(left/90*100)+'%';
+}
+function finish(r){clearInterval(timer);timer=null;state=r;render()}
+
+$('flag').onclick=function(){drawerOpen=!drawerOpen;render()};
+$('offer').onclick=function(){
+  state='offered';left=90;clearInterval(timer);timer=setInterval(tick,1000);render();
+};
+$('ff').onclick=function(){finish('missed')};
+$('reset').onclick=function(){clearInterval(timer);timer=null;state='quiet';left=90;drawerOpen=false;render()};
+$('theme').onclick=function(){
+  var r=document.documentElement,d=r.getAttribute('data-theme')==='dark';
+  if(d){r.removeAttribute('data-theme');this.textContent='Night patrol'}
+  else{r.setAttribute('data-theme','dark');this.textContent='Day patrol'}
+};
+render();
+</script>
+</body>
+</html>
