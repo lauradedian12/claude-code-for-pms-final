@@ -133,7 +133,7 @@ th{font:14px var(--head);letter-spacing:.1em;text-transform:uppercase;color:var(
   <div class="grid g2" style="align-items:center">
     <div>
       <div class="grid g2" style="gap:12px">
-        <div class="tile"><div class="k">Acceptance rate</div><div class="flow"><span class="big">77%</span><span class="arrow">→</span><span class="big red">54%</span></div><div class="small">until 4.2 → week of 10 Aug. Back to 72.7% by 31 Aug.</div><p class="src">Source: pings and callouts tables, rook-database, 29 Jun to 6 Sep.</p></div>
+        <div class="tile"><div class="k">Acceptance rate</div><div class="flow"><span class="big">77%</span><span class="arrow">→</span><span class="big red">54%</span></div><div class="small">until 4.2 → week of 10 Aug. Back to 72.7% by 31 Aug. The 54% week mixes two normal days with five bad ones.</div><p class="src">Source: pings and callouts tables, rook-database, 29 Jun to 6 Sep.</p></div>
         <div class="tile"><div class="k">Callouts filled</div><div class="flow"><span class="big">94–97%</span><span class="arrow">→</span><span class="big red">86–87%</span></div><div class="small">before 4.2 → after. Back to 94.5% by 31 Aug.</div><p class="src">Source: callouts table, rook-database, 29 Jun to 6 Sep.</p></div>
       </div>
       <div class="card hot" style="margin-top:16px">
@@ -539,16 +539,16 @@ render();
       <h3>It already caught things</h3>
       <p class="small">My brief: first run, then after fixes:</p>
       <div class="verdicts"><span class="pill r">Not ready</span><span class="arrow">→</span><span class="pill g">Ready to go on</span></div>
-      <p style="margin-top:10px" class="small">Gaps found: no named owner, pilot covered 2 of 4 responders, tickets had no baseline, open questions had no owners. All fixed. A peer’s brief came back “Fix first” for missing baselines on two metrics.</p>
+      <p style="margin-top:10px" class="small">Caught: no owner, a pilot covering 2 of 4 responders, no ticket baseline. All fixed. A peer’s brief came back “Fix first” too.</p>
     </div>
     <div class="card hot">
       <h3>What the checks would have forced into the open on 4.2</h3>
       <table>
         <tr><th>Check</th><th>What we found instead</th></tr>
-        <tr><td>Owner</td><td>Every roadmap item was owned by one person, who then left.</td></tr>
-        <tr><td>How we’ll know</td><td>“Seasonal dip” was never tested. No baseline to test it against.</td></tr>
-        <tr><td>Scope</td><td>Three changes bundled, so causes can’t be separated.</td></tr>
-        <tr><td>Open questions</td><td>The engineering manager’s 14 Aug question went unanswered.</td></tr>
+        <tr><td>Owner</td><td>One person owned the roadmap, then left.</td></tr>
+        <tr><td>How we’ll know</td><td>“Seasonal” never tested; no baseline.</td></tr>
+        <tr><td>Scope</td><td>Three changes bundled; causes can’t be separated.</td></tr>
+        <tr><td>Open questions</td><td>An engineering question sat unanswered.</td></tr>
       </table>
     </div>
   </div>
@@ -570,7 +570,7 @@ render();
     </div>
     <div class="card hot"><h3>The ask for Helen</h3>
       <p>Agree the direction and the assumptions <b>before anyone touches the code</b>.</p>
-      <p class="mute" style="margin:0">Pilot: four weeks on all four quiet responders, with The Gale as the load comparison. Aim: pings from 3 a week to about 32 combined, missed-ping rate from 12.7% to under 5%, fill rate held at 94% or above.</p>
+      <p class="mute" style="margin:0">Pilot: four weeks on all four quiet responders, with The Gale as the load comparison. Aim: pings from 3 a week to about 32 combined, missed-ping rate from 12.7% to under 5%, fill rate held at 94% or above. <b class="yellow">Proposed stop line:</b> pause the pilot if fill rate drops below 94%.</p>
       <p style="margin:10px 0 0"><b class="yellow">Watch-out:</b> <span class="mute">Supply reads the availability record Dispatch writes and schedules servicing into low-callout windows. Giving pings back to these four changes their load, and Supply sees it with no change on their side.</span></p>
     </div>
   </div>
